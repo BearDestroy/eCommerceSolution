@@ -21,6 +21,8 @@ public partial class ShopQuanAoContext : DbContext
 
     public virtual DbSet<ChuDe> ChuDes { get; set; }
 
+    public virtual DbSet<DanhMuc> DanhMucs { get; set; }
+
     public virtual DbSet<GopY> Gopies { get; set; }
 
     public virtual DbSet<HangHoa> HangHoas { get; set; }
@@ -55,7 +57,9 @@ public partial class ShopQuanAoContext : DbContext
 
     public virtual DbSet<YeuThich> YeuThiches { get; set; }
 
-    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=QUANGCHUONG;Initial Catalog=ShopQuanAo;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -126,6 +130,17 @@ public partial class ShopQuanAoContext : DbContext
                 .HasConstraintName("FK_ChuDe_NhanVien");
         });
 
+        modelBuilder.Entity<DanhMuc>(entity =>
+        {
+            entity.HasKey(e => e.MaDanhMuc).HasName("PK__DanhMuc__B3750887E28915D6");
+
+            entity.ToTable("DanhMuc");
+
+            entity.HasIndex(e => e.TenDanhMuc, "UQ__DanhMuc__650CAE4ED94C4782").IsUnique();
+
+            entity.Property(e => e.TenDanhMuc).HasMaxLength(100);
+        });
+
         modelBuilder.Entity<GopY>(entity =>
         {
             entity.HasKey(e => e.MaGy);
@@ -175,19 +190,19 @@ public partial class ShopQuanAoContext : DbContext
                 .HasForeignKey(d => d.MaNcc)
                 .HasConstraintName("FK_Products_Suppliers");
 
-            entity.HasMany(d => d.MaLoais).WithMany(p => p.MaHhs)
+            entity.HasMany(d => d.MaDanhMucs).WithMany(p => p.MaHhs)
                 .UsingEntity<Dictionary<string, object>>(
-                    "HangHoaLoaiHangHoa",
-                    r => r.HasOne<LoaiHangHoa>().WithMany()
-                        .HasForeignKey("MaLoai")
-                        .HasConstraintName("FK__HangHoaLo__MaLoa__30C33EC3"),
+                    "HangHoaDanhMuc",
+                    r => r.HasOne<DanhMuc>().WithMany()
+                        .HasForeignKey("MaDanhMuc")
+                        .HasConstraintName("FK__HangHoaDa__MaDan__55F4C372"),
                     l => l.HasOne<HangHoa>().WithMany()
                         .HasForeignKey("MaHh")
-                        .HasConstraintName("FK__HangHoaLoa__MaHh__2FCF1A8A"),
+                        .HasConstraintName("FK__HangHoaDan__MaHh__55009F39"),
                     j =>
                     {
-                        j.HasKey("MaHh", "MaLoai").HasName("PK__HangHoaL__A01503B185BFF2D5");
-                        j.ToTable("HangHoaLoaiHangHoa");
+                        j.HasKey("MaHh", "MaDanhMuc").HasName("PK__HangHoaD__4C12F64CC14D9023");
+                        j.ToTable("HangHoaDanhMuc");
                     });
 
             entity.HasMany(d => d.MaTags).WithMany(p => p.MaHhs)

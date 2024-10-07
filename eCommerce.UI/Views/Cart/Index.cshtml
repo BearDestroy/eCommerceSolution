@@ -1,0 +1,277 @@
+﻿@* @model IEnumerable<eCommerce.UI.ViewModel.CartItem>
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer1.cshtml";
+}
+@section BreadCrumb {
+    <section class="site-banner padding-small bg-light-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumbs">
+                        <span class="item">
+                            <a href="index-2.html">Trang chủ /</a>
+                        </span>
+                        <span class="item">
+                            <a href="shop.html">Cửa hàng /</a>
+                        </span>
+                        <span class="item">Giỏ hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<section class="shopify-cart padding-large">
+    <div class="container">
+        <div class="cart-table">
+            <div class="cart-header border-bottom ">
+                <div class="row d-flex">
+                    <h3 class="cart-title col-lg-4">Sản phẩm</h3>
+                    <h3 class="cart-title col-lg-3">Số lượng</h3>
+                    <h3 class="cart-title col-lg-4">Thành tiền</h3>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="cart-item border-bottom padding-small">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3">
+                            <div class="row cart-info d-flex flex-wrap">
+                                <div class="col-lg-5">
+                                    <div class="card-image">
+                                        <img src="@Url.Content(item.ImagePath[0])" alt="cloth" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card-detail">
+                                        <h3 class="card-title">
+                                            <a asp-controller="HangHoa" asp-action="Detail" asp-route-id="@item.MaHh">@item.TenHh</a>
+                                        </h3>
+                                        <div class="card-price">
+                                            <span class="money text-primary"  data-currency-usd="$1200.00" >@item.DonGiaFormatted ₫</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-7">
+                            <div class="row d-flex">
+                                <div class="col-md-6">
+                                    <div class="qty-number d-flex justify-content-start align-items-center">
+                                        <button type="button" class="decrement-button">-</button>
+                                        <input type="number" id="quantity" name="quantity" class="spin-number-output" value="1" min="1" max="100">
+                                        <button type="button" class="increment-button">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="total-price">
+                                        <span class="money text-primary">@item.ThanhTien₫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-2">
+                            <div class="cart-remove">
+                                <a href="#"><i class="icon icon-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="cart-totals">
+            <h2 class="section-title">Cart Totals</h2>
+            <div class="total-price">
+                <table cellspacing="0" class="table">
+                    <tbody>
+                        <tr class="subtotal">
+                            <th>Subtotal</th>
+                            <td data-title="Subtotal">
+                                <span class="price-amount amount text-primary">
+                                    <bdi>
+                                        <span class="price-currency-symbol"></span>@Model.Sum(p => p.ThanhTien)₫
+                                    </bdi>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="order-total">
+                            <th>Total</th>
+                            <td data-title="Total">
+                                <span class="price-amount amount text-primary">
+                                    <bdi>
+                                        <span class="price-currency-symbol">₫</span>@Model.Sum(p => p.ThanhTien) 
+
+                                        
+                                    </bdi>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                <div class="button-wrap">
+                    <a href="cart.html"><button class="btn btn-dark btn-medium">Update Cart</button></a>
+                <a href="shop.html"><button class="btn btn-dark btn-medium">Continue Shopping</button></a>
+                <a href="checkout.html"><button class="btn btn-dark btn-medium">Proceed to checkout</button></a>
+            </div>
+        </div>
+    </div>
+</section> 
+*@
+@model IEnumerable<eCommerce.UI.ViewModel.CartItem>
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer1.cshtml";
+}
+@section BreadCrumb {
+    <section class="site-banner padding-small bg-light-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumbs">
+                        <span class="item">
+                            <a href="index-2.html">Trang chủ /</a>
+                        </span>
+                        <span class="item">
+                            <a href="shop.html">Cửa hàng /</a>
+                        </span>
+                        <span class="item">Giỏ hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<section class="shopify-cart padding-large">
+    <div class="container">
+        <div class="cart-table">
+            <div class="cart-header border-bottom ">
+                <div class="row d-flex">
+                    <h3 class="cart-title col-lg-4">Sản phẩm</h3>
+                    <h3 class="cart-title col-lg-3">Số lượng</h3>
+                    <h3 class="cart-title col-lg-4">Thành tiền</h3>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="cart-item border-bottom padding-small">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3">
+                            <div class="row cart-info d-flex flex-wrap">
+                                <div class="col-lg-5">
+                                    <div class="card-image">
+                                        <img src="@Url.Content(item.ImagePath[0])" alt="cloth" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card-detail">
+                                        <h3 class="card-title">
+                                            <a asp-controller="HangHoa" asp-action="Detail" asp-route-id="@item.MaHh">@item.TenHh</a>
+                                        </h3>
+                                        <div class="card-price">
+                                            <span class="money text-primary">@item.DonGiaFormatted ₫</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-7">
+                            <div class="row d-flex">
+                                <div class="col-md-6">
+                                    <div class="qty-number d-flex justify-content-start align-items-center">
+                                        <button data-id="@item.MaHh" type="button" class="decrement-button">-</button>
+                                        <input type="number" readonly id="quantity-@item.MaHh" name="quantity" value="@item.SoLuong" min="1" max="100" data-dongia="@item.DonGia">
+                                        <input type="number" id="item-@item.MaHh" value="@item.DonGia" readonly hidden/>
+                                        <button data-id="@item.MaHh" type="button" class="increment-button">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="total-price">
+                                        <span class="money text-primary" id="total-price-@item.MaHh">@item.ThanhTien</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-2">
+                            <div class="cart-remove">
+                                <a asp-action="RemoveCart" asp-asp-controller="Cart" asp-route-id="@item.MaHh"><i class="icon icon-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="cart-totals">
+            <h2 class="section-title">Cart Totals</h2>
+            <div class="total-price">
+                <table cellspacing="0" class="table">
+                    <tbody>
+                        <tr class="subtotal">
+                            <th>Subtotal</th>
+                            <td data-title="Subtotal">
+                                <span class="price-amount amount text-primary" id="cart-subtotal">
+                                    <bdi>
+                                        <span class="price-currency-symbol"></span>@Model.Sum(p => p.ThanhTien)₫
+                                    </bdi>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="order-total">
+                            <th>Tổng thành tiền</th>
+                            <td data-title="Total">
+                                <span class="price-amount amount text-primary" id="cart-total">
+                                    <bdi>
+                                        <span class="price-currency-symbol">₫</span>@Model.Sum(p => p.ThanhTien)
+                                    </bdi>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="button-wrap">
+                <a href="cart.html"><button class="btn btn-dark btn-medium">Cập nhật giỏ hàng</button></a>
+                <a href="shop.html"><button class="btn btn-dark btn-medium">Tiếp tục mua sắm</button></a>
+                <a href="checkout.html"><button class="btn btn-dark btn-medium">Thanh toán</button></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var minus = document.querySelectorAll('.decrement-button');
+    var add = document.querySelectorAll('.increment-button');
+
+    add.forEach(function (btn) {
+        var id = btn.dataset.id;
+        btn.addEventListener('click', addQuantity(id))
+    });
+
+    function addQuantity(masp) {
+        var item = document.getElementById("quantity-" + masp);
+        var number = parseInt(item.value);
+
+        if (number < 999) {
+            item.value = number + 1;
+        }
+    }
+
+    minus.forEach(function (btn) {
+        var id = btn.dataset.id;
+        btn.addEventListener('click', function () {
+            console.log(id);
+        });
+    });
+
+    function minusQuantity(masp) {
+        var item = document.getElementById("quantity-" + masp);
+        var number = parseInt(item.value);
+
+        if (number > 1) {
+            item.value = number - 1;
+        }
+    }
+        
+</script>

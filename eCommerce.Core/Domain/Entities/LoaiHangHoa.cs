@@ -12,6 +12,4 @@ public partial class LoaiHangHoa
     public string? TenLoaiAlias { get; set; }
 
     public string? MoTa { get; set; }
-
-    public virtual ICollection<HangHoa> MaHhs { get; set; } = new List<HangHoa>();
 }

@@ -1,24 +1,21 @@
 ﻿@model eCommerce.Core.Domain.Entities.HangHoaCoHinhAnh
 @{
-    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Views/Shared/_LayoutCustomer1.cshtml";
 }
 
 @section BreadCrumb {
-    <section class="site-banner jarallax min-height300 padding-large" style="background: url(images/hero-image.jpg) no-repeat; background-position: top;">
+    <section class="site-banner padding-small bg-light-grey">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-title">Cửa hàng</h1>
                     <div class="breadcrumbs">
                         <span class="item">
-                            <a href="#">Trang chủ /</a>
+                            <a href="index-2.html">Trang chủ /</a>
                         </span>
                         <span class="item">
-                            <a href="/">Cửa hàng</a>
+                            <a href="shop.html">Cửa hàng /</a>
                         </span>
-                        <span class="item">
-                            <a href="/">Chi tiết sản phẩm</a>
-                        </span>
+                        <span class="item">Chi tiết sản phẩm</span>
                     </div>
                 </div>
             </div>
@@ -81,9 +78,9 @@
                     </div>
                     <div class="product-price">
                         @*Giá giảm giá*@
-                        <strong>@Model.HangHoa.DonGia@Model.HangHoa.MoTaDonVi</strong>
+                        <strong>@Model.HangHoa.DonGiaFormatted@Model.HangHoa.MoTaDonVi</strong>
                         @*Giá gốc*@
-                        <del>@Model.HangHoa.DonGia@Model.HangHoa.MoTaDonVi</del>
+                        <del>@Model.HangHoa.DonGiaFormatted@Model.HangHoa.MoTaDonVi</del>
                     </div>
                     @*Mô tả sản phẩm*@
                     <p>
@@ -125,34 +122,32 @@
                                 </li>
                             </ul>
                         </div>
-                        
-                        <div class="product-quantity">
-                            @*Tồn kho*@
-                            <div class="item-title">
-                                <strong>2 in stock</strong>
-                            </div>
-                            @*Số lượng*@
-                            <div class="stock-button-wrap">
-                                <div class="product-quantity d-flex align-items-center">
-                                    <h4 class="item-title no-margin">Quantity:</h4>
-                                    <div class="qty-field d-flex">
-                                        <div class="qty-number d-flex justify-content-start align-items-center">
-                                            <button class="decrement-button">-</button>
-                                            <input type="text" id="quantity" name="quantity" class="spin-number-output" value="1" min="1"
-                                                   max="100">
-                                            <button class="increment-button">+</button>
+                        <form asp-controller="Cart" asp-action="ThemVaoGioHang" asp-route-id="@Model.HangHoa.MaHh" method="post">
+                            <div class="product-quantity">
+                                <div class="item-title">
+                                    <strong>2 in stock</strong>
+                                </div>
+                                <div class="stock-button-wrap">
+                                    <div class="product-quantity d-flex align-items-center">
+                                        <h4 class="item-title no-margin">Số lượng:</h4>
+                                        <div class="qty-field d-flex">
+                                            <div class="qty-number d-flex justify-content-start align-items-center">
+                                                <button type="button" class="decrement-button">-</button>
+                                                <input type="number" id="quantity" name="quantity" class="spin-number-output" value="1" min="1" max="100">
+                                                <button type="button" class="increment-button">+</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="action-buttons">
-                            <button type="submit" class="btn btn-medium btn-dark">Buy now</button>
-                            <button type="submit" name="add" id="add-to-cart" class="btn btn-medium btn-dark">
-                                <span id="add-to-cart">Add to cart</span>
-                            </button>
-                            <button type="submit" class="btn btn-medium btn-dark"><i class="icon icon-heart"></i></button>
-                        </div>
+                            <div class="action-buttons">
+                                <button type="submit" class="btn btn-medium btn-dark">Mua ngay</button>
+                                <button type="submit" name="add" id="add-to-cart" class="btn btn-medium btn-dark">
+                                    <span id="add-to-cart">Thêm vào giỏ hàng</span>
+                                </button>
+                                <button type="submit" class="btn btn-medium btn-dark"><i class="icon icon-heart"></i></button>
+                            </div>
+                        </form>
                     </div>
                     <div class="meta-product margin-small">
                         <div class="meta-item d-flex flex-wrap align-items-baseline">
@@ -164,15 +159,12 @@
                         <div class="meta-item d-flex flex-wrap align-items-baseline">
                             <h4 class="item-title no-margin">Category:</h4>
                             <ul class="select-list list-unstyled d-flex">
-                                <li data-value="S" class="select-item">
-                                    <a href="#">Women</a>,
-                                </li>
-                                <li data-value="S" class="select-item">
-                                    <a href="#">Popular</a>,
-                                </li>
-                                <li data-value="S" class="select-item">
-                                    <a href="#">Orange</a>
-                                </li>
+                                @foreach (var item in Model.HangHoa.MaDanhMucs)
+                                {
+                                    <li data-value="S" class="select-item">
+                                        <a href="#">@item.TenDanhMuc</a>
+                                    </li>
+                                }
                             </ul>
                         </div>
                         <div class="meta-item d-flex flex-wrap align-items-baseline">

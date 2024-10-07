@@ -30,6 +30,7 @@ namespace Infrastructure.Respositories
         {
             var hangHoa = _db.HangHoas
                           .Include(h => h.MaTags) // Nếu cần thêm các liên kết khác
+                          .Include(h => h.MaDanhMucs)
                           .SingleOrDefault(h => h.MaHh == id);
 
             if (hangHoa == null)

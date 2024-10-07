@@ -10,9 +10,11 @@
         </a>
         <div class="cart-concern">
             <div class="cart-button d-flex justify-content-between align-items-center">
+                <a asp-action="ThemVaoGioHang" asp-controller="Cart" asp-route-id="@item.MaHh">
                 <button type="button" class="btn-wrap cart-link d-flex align-items-center">
                     Thêm vào giỏ hàng <i class="icon icon-arrow-io"></i>
                 </button>
+                </a>
                 <button type="button" class="wishlist-btn">
                     <i class="icon icon-heart"></i>
                 </button>

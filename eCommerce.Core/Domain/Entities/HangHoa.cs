@@ -16,6 +16,7 @@ public partial class HangHoa
     public string? MoTaDonVi { get; set; }
 
     public double? DonGia { get; set; }
+    public string DonGiaFormatted => DonGia.HasValue ? DonGia.Value.ToString("#,0") : "0đ";
 
     public DateTime NgaySx { get; set; }
 
@@ -35,7 +36,7 @@ public partial class HangHoa
 
     public virtual ICollection<YeuThich> YeuThiches { get; set; } = new List<YeuThich>();
 
-    public virtual ICollection<LoaiHangHoa> MaLoais { get; set; } = new List<LoaiHangHoa>();
+    public virtual ICollection<DanhMuc> MaDanhMucs { get; set; } = new List<DanhMuc>();
 
     public virtual ICollection<Tag> MaTags { get; set; } = new List<Tag>();
 }
