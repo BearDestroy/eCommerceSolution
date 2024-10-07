@@ -1,0 +1,6 @@
+﻿@model IEnumerable<eCommerce.Core.Domain.Entities.HangHoa>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_LayoutDanhSachHangHoa.cshtml";
+}
+@await Html.PartialAsync("HangHoa", Model)

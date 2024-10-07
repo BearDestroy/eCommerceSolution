@@ -1,0 +1,24 @@
+﻿@model IEnumerable<eCommerce.Core.Domain.Entities.HangHoa>
+@using eCommerce.Core.Domain.Entities;
+@{  
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDanhSachHangHoa.cshtml";
+}
+@section BreadCrumb {
+    <section class="site-banner jarallax min-height300 padding-large" style="background: url(images/hero-image.jpg) no-repeat; background-position: top;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-title">Cửa hàng</h1>
+                    <div class="breadcrumbs">
+                        <span class="item">
+                            <a href="#">Trang chủ /</a>
+                        </span>
+                        <span class="item">Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@await Html.PartialAsync("HangHoa",Model)

@@ -1,0 +1,16 @@
+﻿@using eCommerce.Core.DTO
+@model IEnumerable<eCommerce.Core.DTO.LoaiHangHoaResponse>
+
+<ul class="cat-list">
+@foreach (LoaiHangHoaResponse item in Model)
+{
+    @* <a asp-controller="HangHoa" asp-action="Index" asp-route-loai="@item.MaLoai" title="@item.TenLoai" class="cat-list-item">
+        <li class="cat-list-item" style="font-size: 24px">@item.TenLoai</li>
+    </a> *@
+    <li class="cat-list-item">
+        <a asp-controller="HangHoa" asp-action="Index" asp-route-loai="@item.MaLoai" title="@item.TenLoai">@item.TenLoai</a>
+    </li>
+
+}
+</ul>
+

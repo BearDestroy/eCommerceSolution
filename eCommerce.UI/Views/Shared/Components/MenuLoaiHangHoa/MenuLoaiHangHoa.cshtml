@@ -1,0 +1,13 @@
+﻿@using eCommerce.Core.DTO
+@model IEnumerable<eCommerce.Core.DTO.LoaiHangHoaResponse>
+<ul class="tabs list-unstyled">
+    <a asp-controller="HangHoa" asp-action="Index">
+    <li data-tab-target="#all" class="active tab">All</li>
+    </a>
+    @foreach (LoaiHangHoaResponse item in Model)
+    {
+        <a asp-controller="HangHoa" asp-action="Index" asp-route-loai="@item.MaLoai">
+        <li class="tab">@item.TenLoai</li>
+        </a>
+    }
+</ul>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<eCommerce.Core.Domain.Entities.HangHoa>
+@using eCommerce.Core.Domain.Entities;
+@foreach (HangHoa item in Model)
+{
+    <div class="product-item col-lg-4 col-md-6 col-sm-6">
+        <a asp-controller="HangHoa" asp-action="Detail" asp-route-id="@item.MaHh">
+        <div class="image-holder">
+            <img src="" alt="Books" class="product-image">
+        </div>
+        </a>
+        <div class="cart-concern">
+            <div class="cart-button d-flex justify-content-between align-items-center">
+                <button type="button" class="btn-wrap cart-link d-flex align-items-center">
+                    Thêm vào giỏ hàng <i class="icon icon-arrow-io"></i>
+                </button>
+                <button type="button" class="wishlist-btn">
+                    <i class="icon icon-heart"></i>
+                </button>
+            </div>
+        </div>
+        <div class="product-detail">
+            <h3 class="product-title">
+                <a asp-controller="HangHoa" asp-action="Detail" asp-route-id="@item.MaHh">
+                    @item.TenHh
+                </a>
+            </h3>
+            <div class="item-price text-primary">@item.DonGia</div>
+        </div>
+    </div>
+}
