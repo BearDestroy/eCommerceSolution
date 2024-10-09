@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace eCommerce.Core.DTO
+{
+    public class LoginRequest
+    {
+        [Display(Name = "Tên đăng nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
+        [MaxLength(20,ErrorMessage = "Tên đăng nhập không quá 20 kí tự")]
+        public string Username { get; set; }
+
+        [Display(Name = "Mật khẩu")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }    
+
+
+    }
+}

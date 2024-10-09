@@ -1,0 +1,42 @@
+﻿@model eCommerce.Core.DTO.LoginRequest
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<style>
+    .text-danger {
+        color: red;
+    }
+
+</style>
+
+<section class="shopify-cart checkout-wrap">
+    <div class="container">
+        <form class="form-group" asp-action="DangNhap" asp-controller="KhachHang" method="post" asp-route-returnul="@ViewBag.ReturnUrl">
+            <div class="row d-flex flex-wrap">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title align-center">Đăng nhập</h2>
+                    <div class="billing-details">
+                        <label asp-for="@Model.Username"></label>
+                        <input asp-for="@Model.Username" type="text" class="form-control no-margin">
+                        <span asp-validation-for="@Model.Username" class="text-danger"></span>
+
+                        <label asp-for="@Model.Password"></label>
+                        <input asp-for="@Model.Password" type="password" class="form-control no-margin">
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                        <button type="submit" name="submit" class="btn btn-dark btn-full btn-medium">Đăng nhập</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="margin: 250px">
+    </div>
+</section>
+
+
+
